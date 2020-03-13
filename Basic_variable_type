@@ -1,0 +1,14 @@
+1. 基本内置类型：
+    * 整型：包括字符型（char,wchar_t），布尔型（bool）,整数型（short,int,long,longlong）
+        整型中各类型又可以分为有符号性（unsigned），和有符号型（signed）
+        字符型：字符在内存中的存储也是以字节形式存储，只不过对这些特殊二进制位在编译器中加以声明，字符的编码方式有ASCII🐴，Unicode(UTF_8,UTF_
+                16,UTF_32)，GBK/GB2312/GB18030等方式。Unicode是为了扩充汉字，日语，韩语等而产生的。UTF_8占1-4字节，UTF_16占用2-4字节，UTF-32
+                占用4字节。GBK/GB2312/GB1803是汉字字符集。有时候汉字的输出产生乱码，试着切换GBK编码方式试一下。
+                
+                字符型中可能是signed，也可能是unsigned，这取决于所使用的编译器。
+                
+                宽字符的输入/输出 应该用wcin/wcout
+        布尔型：True/False 
+                也可以将整数值付给bool型，0为false,任何非零都为True
+                
+        整数型：64位：short 2字节，int 4字节，long 8字节 
