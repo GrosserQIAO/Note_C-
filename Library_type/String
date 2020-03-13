@@ -1,0 +1,14 @@
+1. 初始化：
+    四种方式：string s1 / string s2(s1) / string s3("value")  / string (n, 'c')  
+2. string对象的读写：
+    cin读取，cout输出，忽略字符中间的空格符，
+    读入未知数目的字符时，可以while(cin>>str)
+    getline()两个输入参数，一个是输入流对象，一个是string对象。getline不包括换行符，而且忽略开头的换行符，返回空字符串。
+3.string对象的操作。
+    s.empty() 如果s是空字符串，则返回True,否则False
+    s.size() 返回字数
+    s[n] 返回位置为n的字符
+    s1+s2 连接字符串
+    s1 = s2  s1替换为s2
+    s1==s2 比较内容
+    !=, <,<=,>,>=
