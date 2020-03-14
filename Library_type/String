@@ -6,9 +6,30 @@
     getline()两个输入参数，一个是输入流对象，一个是string对象。getline不包括换行符，而且忽略开头的换行符，返回空字符串。
 3.string对象的操作。
     s.empty() 如果s是空字符串，则返回True,否则False
-    s.size() 返回字数
-    s[n] 返回位置为n的字符
-    s1+s2 连接字符串
+    s.size() 返回字数，size（）成员函数似乎应该返回一个整数值，但实际上返回了一个string::size_type的值。
+        * 注：size::type值是根据机器的字长不同而设计的。本质上是为了匹配不同的机器而设计的。例如：int length; if(length==s.size())...
+              看上去好像没什么问题，但是设想在一个16位的机器上存储一个大于32767的数（默认是unsigned的），那么结果将会返回一个奇怪的值。
+              因此安全的做法是使用string类中string::size_type这种匹配类型，可以存储任意长的字符串长度，而不存在溢出的问题。
+    s[n] 返回位置为n的字符，下标位置的索引同样需要一个string::size_type 类型，防止index过大，而机器无法表示。
+    s1+s2 连接字符串，只允许字符串变量之间的连接和字面值常量的连接，而不允许字面值常量之间的连接。例如：s1=s2+"hello"+" world",是合法的，但s1=
+        "hello"+" world"+s2;
     s1 = s2  s1替换为s2
-    s1==s2 比较内容
+    s1==s2 比较内容，字符串相等指的是字符相等，且字符的长度相等，区分大小写。
+        * 比较规则：如果长度不同，且前面部分相匹配，则短的<长的；如果前面不匹配，则比较第一个不匹配的字符。例如：str1="Hello",str2="Hello
+          world!",str3="Hiya",则str1<str2,str3>str1/str2
     !=, <,<=,>,>=
+4. string对象中字符的处理
+    string对象经常对字符进行处理，相关函数都在cctype中进行了定义。
+    * isalnum(c) 如果c是字母或者数字，则返回True,
+    * isalpha(c) 如果c是字母，则返回True,
+    * iscntrl(c) 如果c是控制符，则返回True,
+    * isdigit(c) 如果c是数字，则返回True
+    * isgraph(c) 如果c不是空格符，但可以打印，则为True
+    * islower(c) 如果c是小写，则TRue
+    * isprint(c) 如果可以打印，则为True
+    * ispunct(c) 如果是标点，则为True
+    * isspace(c) 如果c是空白，则返回TRue
+    * isupper(c) 如果是大写，则True
+    * isxdigit(c) 如果十六进制数，则Ture
+    * tolower(c) 如果是大写，则返回小写
+    * toupper(c) 如果是小写，则返回大写
