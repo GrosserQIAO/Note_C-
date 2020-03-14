@@ -1,0 +1,19 @@
+// vector 是同一种类型的对象的集合，每一个对象都有一个对应的整数索引值。和string对象一样，标准库负责管理与存储元素相关的内存。
+    我们把vector成为容器，是因为他可以包含其他对象。一个容器中的对象必须是同一类型的。
+    #include <vector> 必须包含头文件
+    vector是一个类模板，使用模板可以编写一个类定义或函数定义，而用于多个不同的数据类型。因此可以保存string类型的vector,也可以保存int值得vector,
+      还可以保存类类型的vector
+1. vector 对象的定义和初始化
+    vector<int> ivec1(10);  // 如果容器中类型是基本内置类型，则初始化值为0，如果是类类型，则按照类的构造函数的初始化定义进行初始化。
+    vector<string> ivec2(ivec3);   // 复制对象要是同类型的
+    vector<int> ivec4(5,2)  // 用元素个数和元素值对vector进行初始化
+    注： vector及其他标准库容器可以高效的添加元素。
+2. vector对象的操作
+    v.empty() 如果是空，则返回Ture
+    v.size() 返回元素个数,使用vector<datatype>::size_type
+    v.push_back(c) 在末尾增添一个为c的元素
+    v[n] 返回v中位置为n的元素
+    v1=v2 v1替换为v2
+    v1 == v2 相等则返回True
+    != < <= > >=
+    
