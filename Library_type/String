@@ -4,6 +4,8 @@
     cin读取，cout输出，忽略字符中间的空格符，
     读入未知数目的字符时，可以while(cin>>str)
     getline()两个输入参数，一个是输入流对象，一个是string对象。getline不包括换行符，而且忽略开头的换行符，返回空字符串。
+    * 如果cin与geline()一起使用时，一定要注意，cin后面要加上cin.ignore()，因为cin的输入以换行符作为结束，但会计入输入流buffer中。但对于
+      getline则换行符并不计入字符串，而会返回一个空字符。所以如果不加cin.ignore(),就会跳过getline().
 3.string对象的操作。
     s.empty() 如果s是空字符串，则返回True,否则False
     s.size() 返回字数，size（）成员函数似乎应该返回一个整数值，但实际上返回了一个string::size_type的值。
