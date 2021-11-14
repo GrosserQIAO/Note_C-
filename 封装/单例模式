@@ -1,0 +1,17 @@
+class Chairman
+{
+
+public:
+	static Chairman* getInstance()
+	{
+		return singleman;
+	} 
+private:
+	Chairman(){};//将构造函数私有化
+	Chairman(const Chairman &c){};
+
+	//数据共享，只读
+	static Chairman * singleman;
+};
+
+Chairman* Chairman::singleman=new Chairman;//认为是类内
