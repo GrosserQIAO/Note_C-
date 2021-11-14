@@ -1,0 +1,66 @@
+#include <iostream>
+#include <string>
+#include <string.h>
+#include <stdio.h>
+using namespace std;
+
+class Computer
+{
+public:
+	Computer()
+	{
+
+	}
+	Computer(char * name)
+	{
+		_name=(char*)malloc(strlen(name)+1);    // 构造函数用于初始化
+		strcpy(_name,name);
+		//cout<<"调用有参构造"<<endl;
+	}
+	Computer(const Computer &p)
+	{
+		_name=(char*)malloc(strlen(p._name)+1);
+		strcpy(_name,p._name);
+		//cout<<"调用拷贝构造"<<endl;
+	}
+
+	~Computer()   //析构函数用于释放内存空间
+	{
+		free(_name);
+		_name=NULL;
+		//cout<<"析构调用"<<endl;
+	}
+	char * _name;
+
+};
+
+class Ipad
+{
+public:
+	Ipad(){}
+	Ipad(int id)
+	{
+		_id=id;
+	}
+
+	int _id;
+};
+
+class Person
+{
+public:
+	Person(Computer p,Ipad ipad):_p(p),_ipad(ipad)    //通过列表方式赋值
+	{
+  /*类与结构体可直接赋值，无论是在c还是c++中，相当于调用了一次拷贝构造函数
+  1.隐式构造
+  //_p=p;
+  //_ipad=ipad;
+  
+  2.显示构造
+  //_p=Computer(p)
+  //_ipad=Ipad(ipad)
+  */
+	}
+	Computer _p;
+	Ipad _ipad;
+};
