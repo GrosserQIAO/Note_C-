@@ -1,0 +1,50 @@
+#include <iostream>
+#include <string>
+#include <string.h>
+#include <stdio.h>
+using namespace std;
+
+class Printer
+{
+public:
+	static Printer* getInstance()
+	{
+		return printer;
+	}
+
+	void printerText(string text)
+	{
+		cout<<"打印内容:"<<text<<endl;
+		_counter++;
+	}
+	void printercounter()
+	{
+		cout<<"打印次数："<<_counter<<endl;
+	}
+
+private:
+	Printer(){}
+	Printer(int counter){_counter=counter;}
+	Printer(const Printer &p);
+	static Printer* printer;
+	int _counter;
+
+};
+Printer * Printer::printer=new Printer(0);
+
+
+void test()
+{
+	Printer* c1=Printer::getInstance();		
+	//静态成员函数可以直接通过类名访问到。但非静态成员函数不可以
+	Printer* c2=Printer::getInstance();
+	c1->printerText("你好");
+	c2->printerText("qiao");
+	(*c1).printercounter();
+
+}
+int main()
+{
+	test();
+	return 0;
+}
