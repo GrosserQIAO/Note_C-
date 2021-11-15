@@ -1,0 +1,65 @@
+#include <iostream>
+#include <string>
+#include <string.h>
+#include <stdio.h>
+using namespace std;
+
+//1.全局函数做友元函数
+class Building;
+class Goodgay
+{
+public:
+	Goodgay();
+	void visit();
+private:
+	Building *b;
+};
+
+class Building
+{
+	friend void visit(const Building &b);	//加friend关键字声明即可
+	friend class Goodgay;
+	friend void Goodgay::visit();
+public:
+	Building()
+	{
+		sittingroom="千风神殿";
+		bedroom="千岩神殿";
+	}
+	string sittingroom;
+private:
+	string bedroom;
+};
+
+
+Building b;
+void visit(const Building &b)
+{
+	cout<<b.sittingroom<<endl;
+	cout<<b.bedroom<<endl;
+}
+
+//2.类作为友元类，则类中所有函数均可访问到另一个类中成员
+
+Goodgay::Goodgay()
+	{
+		b=new Building;
+	}
+void Goodgay::visit()
+	{
+		cout<<b->sittingroom<<endl;
+		cout<<b->bedroom<<endl;
+	}
+
+//3. 类中某个成员函数作为另一个类的友元函数
+
+
+
+int main()
+{
+	//visit(b);
+
+	Goodgay g;
+	g.visit();
+	return 0;
+}
