@@ -1,0 +1,33 @@
+#include <iostream>
+#include <string>
+#include <string.h>
+#include <stdio.h>
+using namespace std;
+
+class Building
+{
+public:
+	void print()const		/*1.本质上函数与数据分开存储，访问数据时，编译器自动加上
+								this指针，但对于常量，c++中由于检查严格，必须用const
+								修饰，需要在括号后加上const，即所谓的 常函数*/
+	{
+	    this->m_a=100;			/*2.常量类中的数据全部保存为常量（虽然局部常量是在栈区），
+							    故所有数据均不可修改,如果一定要修改（比如同济调用次数时
+							    必须修改），则加mutable修改，改变常量的属性*/
+		cout<<m_a<<endl;
+	}
+	mutable int m_a=10;		/*3.类中加const修饰的常量只作用在本类作用域中，其实并非只有一份
+								每创建一个对象，都会有一个常量产生，故失去常量的意义。而对于
+								常量类中数据，无论加不加const，变量都储存在常量区，而受到常量区
+								的保护，故无法被直接修改。*/
+};
+void test()
+{
+	const Building b;
+	b.print();
+}
+int main()
+{
+	test();
+	return 0;
+}
