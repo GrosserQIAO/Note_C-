@@ -1,0 +1,154 @@
+#include <iostream>
+#include <string>
+#include <string.h>
+#include <stdio.h>
+using namespace std;
+
+class Mystring
+{
+	friend ostream& operator<<(ostream &cout,const Mystring &str);
+	friend istream& operator>>(istream &cin,Mystring &str);
+public:
+	Mystring();
+	Mystring(const char *str);
+	Mystring(const Mystring &str);
+	~Mystring();
+	char& operator[](int dex);
+	Mystring& operator=(const char * str);
+	Mystring& operator=(const Mystring &str);
+	Mystring operator+(const char * str);
+	Mystring operator+(const Mystring &str);
+	bool operator==(const char *str);
+	bool operator==(const Mystring &str);
+private:
+	char *_str;
+	int _size;
+};
+ostream& operator<<(ostream &cout,const Mystring &str)
+{
+	cout<<str._str;
+	return cout;
+}
+
+istream& operator>>(istream &cin,Mystring &str)
+{
+	char buf[1024];
+	cin>>buf;
+
+	if(!str._str)
+	{
+		delete [] str._str;  
+		str._str=NULL;
+	}
+	str._str=new char[strlen(buf)+1];
+	strcpy(str._str,buf);
+	str._size=strlen(buf);
+	return cin;
+}
+char& Mystring::operator[](int dex)
+{
+	return this->_str[dex];
+}
+
+Mystring& Mystring::operator=(const char * str)
+{
+	if(!this->_str)
+	{
+		delete [] this->_str;
+		this->_str=NULL;
+	}
+	this->_size=strlen(str);
+	this->_str=new char[this->_size+1];
+	strcpy(this->_str,str);
+	return *this;	
+}
+Mystring& Mystring::operator=(const Mystring &str)
+{
+	if(!this->_str)
+	{
+		delete [] this->_str;
+		this->_str=NULL;
+	}
+	this->_size=strlen(str._str);
+	this->_str=new char[this->_size+1];
+	strcpy(this->_str,str._str);
+	return *this;	
+}
+
+Mystring Mystring::operator+(const char * str)
+{
+	int newsize=this->_size+strlen(str);
+	char * temp=new char[newsize+1];
+	memset(temp,0,newsize);
+	strcat(temp,this->_str);
+	strcat(temp,str);
+	delete [] temp;
+	Mystring newstr(temp);
+	return newstr;
+}
+Mystring Mystring::operator+(const Mystring &str)
+{
+	int newsize=this->_size+strlen(str._str);
+	char * temp=new char[newsize+1];
+	memset(temp,0,newsize);
+	strcat(temp,this->_str);
+	strcat(temp,str._str);
+	delete [] temp;
+	Mystring newstr(temp);
+	return newstr;
+}
+
+bool Mystring::operator==(const char *str)
+{
+	if(!strcmp(this->_str,str))return true;
+	return false;
+}
+bool Mystring::operator==(const Mystring &str)
+{
+	if(!strcmp(this->_str,str._str))return true;
+	return false;
+}
+
+Mystring::Mystring()
+{
+	this->_str=NULL;
+	this->_size=0;
+}
+Mystring::Mystring(const char *str)
+{
+	this->_size=strlen(str);
+	this->_str=new char[this->_size+1];
+	strcpy(this->_str,str);
+}
+Mystring::Mystring(const Mystring &p)
+{
+	this->_size=strlen(p._str);
+	this->_str=new char[this->_size+1];
+	strcpy(this->_str,p._str);
+}
+Mystring::~Mystring()
+{
+	delete [] this->_str;
+	this->_str=NULL;
+}
+void test()
+{
+	Mystring str="qiao";
+	cout<<str<<endl;
+	cout<<"请输入：";
+	cin>>str;
+	cout<<"str当前内容为："<<str<<endl;
+	cout<<str[2]<<endl;
+	Mystring p("haha");
+	str=p;
+	cout<<str<<endl;
+
+	if(str=="qiao")cout<<"相同"<<endl;
+	else cout<<"不同"<<endl;
+
+}
+int main()
+{
+	test();
+	return 0;
+}
