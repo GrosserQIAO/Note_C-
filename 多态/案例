@@ -1,0 +1,65 @@
+#include <iostream>
+#include <string>
+#include <string.h>
+#include <stdio.h>
+using namespace std;
+
+class Calculator
+{
+public:
+	Calculator(){}
+	Calculator(int a,int b)
+	{
+		_a=a;
+		_b=b;
+	}
+	virtual int getresult()
+	{
+		return 0;
+	}
+	int _a=5;
+	int _b=2;
+};
+class AddCalculator:public Calculator
+{
+public:
+	int getresult()
+	{
+		return _a+_b;
+	}
+};
+class SubCalculator:public Calculator
+{
+public:
+	int getresult()
+	{
+		return _a-_b;
+	}
+};
+class MalCalculator:public Calculator
+{
+public:
+	int getresult()
+	{
+		return _a*_b;
+	}
+};
+class DivCalculator:public Calculator
+{
+public:
+	int getresult()
+	{
+		return _a/_b;
+	}
+};
+void test()
+{
+	Calculator* c=new AddCalculator;
+	cout<< c->getresult()<<endl;
+}
+int main()
+{
+
+	test();
+	return 0;
+}
